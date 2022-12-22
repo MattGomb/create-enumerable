@@ -1,16 +1,18 @@
-require_relative('my_enumerable')
+require_relative 'my_enumerable'
+
 class MyList
   include MyEnumerable
-  def initialize(list)
+
+  def initialize(*list)
     @list = list
   end
 
-  def each(&block)
-    @list.each { |a| block.call a }
+  def each
+    yield(@list)
   end
 end
 
-list = MyList.new([1, 2, 3, 4])
+list = MyList.new(1, 2, 3, 4)
 puts(list.all? { |e| e < 5 })
 puts(list.all? { |e| e > 5 })
 puts(list.any? { |e| e == 2 })

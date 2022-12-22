@@ -1,17 +1,17 @@
 module MyEnumerable
-  def any?
-    each { |a| return true if yield a }
-    false
-  end
-
   def all?
-    each { |a| return false unless yield a }
+    @list.each { |a| return false unless yield(a) }
     true
   end
 
+  def any?
+    @list.each { |a| return true if yield(a) }
+    false
+  end
+
   def filter
-    result = []
-    each { |a| result << a if yield a }
-    result
+    arr = []
+    @list.each { |a| arr.push(a) if yield(a) }
+    arr
   end
 end
